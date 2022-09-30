@@ -3,12 +3,12 @@
     {
       "id": 1,
       "item": "Arroz",
-      "quantidade": 5
+      "quantidade": "8"
     },
     {
       "id": 2,
       "item": "Feijão",
-      "quantidade": 4
+      "quantidade": "4"
     },
     {
       "id": 3,
@@ -17,8 +17,33 @@
     },
     {
       "item": "Slova",
-      "quantidade": 2,
+      "quantidade": "3",
       "id": 4
+    },
+    {
+      "item": "51",
+      "quantidade": 2,
+      "id": 6
+    },
+    {
+      "item": "old par",
+      "quantidade": 3,
+      "id": 7
+    },
+    {
+      "item": "WHISKY Jack Daniels",
+      "quantidade": 3,
+      "id": 8
+    },
+    {
+      "item": "Whisky ballantines 25 anos",
+      "quantidade": 1,
+      "id": 9
+    },
+    {
+      "item": "Whisky Royal Salute 700 ML",
+      "quantidade": 3,
+      "id": 10
     }
   ]
 }

@@ -1,3 +1,39 @@
+const API_URL = 'http://localhost:8000';
+
+function buscarParaEditar(id) {
+    input_editar_id.value = id;
+
+    fetch((API_URL+'/compras/'+id))
+        .then(res => res.json())
+        .then(dados => {
+            input_editar_item.value = dados.item;
+            input_editar_quantidade.value = dados.quantidade;
+        });
+}
+
+function editar (){
+    event.preventDefault();
+   
+    let dados = {
+        item: input_editar_item.value,
+        quantidade: input_editar_quantidade.value,
+    };
+
+    fetch(API_URL+'/compras/'+input_editar_id.value, {
+        method: 'PATCH',
+        body: JSON.stringify(dados),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .then(() => atualizarlista());
+
+    let x = document.querySelector('[data-bs-dismiss="offcanvas"]');
+
+    x.dispatchEvent(new Event('click'));
+}
+
 function Inserir(){
     event.preventDefault();
 
@@ -6,7 +42,7 @@ function Inserir(){
         "quantidade": parseInt(input_quantidade.value)
     };
 
-    fetch('http://localhost:8000/compras', {
+    fetch(API_URL+'/compras', {
         method: 'POST',
         body: JSON.stringify(dados),
         headers: {
@@ -27,7 +63,7 @@ async function excluir (id) {
         return;
     }
 
-    fetch('http://localhost:8000/compras/'+id, {
+    fetch(API_URL+'/compras/'+id, {
         method: 'DELETE'
     });
 
@@ -37,7 +73,7 @@ async function excluir (id) {
 
 function atualizarlista() {
     tabela_compras.innerHTML = '';
-    fetch('http://localhost:8000/compras')
+    fetch(API_URL+'/compras')
     .then(function (resposta) {
         return resposta.json();
     })
@@ -49,7 +85,7 @@ function atualizarlista() {
                 <td>${cadaItem.item}</td>
                 <td>${cadaItem.quantidade}</td>
                 <td>
-                    <button class="btn btn-warning">
+                    <button onclick="buscarParaEditar(${cadaItem.id})" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditar" class="btn btn-warning">
                         Editar
                     </button>
 
@@ -61,6 +97,7 @@ function atualizarlista() {
          `;
         });
     });
+
 }
 
 atualizarlista();
